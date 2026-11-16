@@ -1,22 +1,27 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
     <meta name="theme-color" content="#f4f6fc">
+    <meta name="description" content="A simple daily checklist to organise your tasks and track your progress.">
 
     <title>Daily Checklist</title>
 
+    <link rel="manifest" href="./manifest.json">
     <link rel="stylesheet" href="./style.css">
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
 
 <body>
 
 <div class="app">
 
-    <!-- CALENDAR SCREEN -->
     <div id="calendarScreen">
 
         <header class="app-header">
@@ -24,7 +29,6 @@
             <p>Your little space for daily progress.</p>
         </header>
 
-        <!-- Statistics -->
         <section class="stats">
 
             <div class="stat-card">
@@ -39,64 +43,38 @@
 
         </section>
 
-        <!-- Calendar -->
         <section class="calendar-card">
 
             <div class="calendar-header">
-
-                <button id="prevMonth" aria-label="Previous month">
-                    ❮
-                </button>
-
+                <button id="prevMonth" aria-label="Previous month">❮</button>
                 <h2 id="monthYear"></h2>
-
-                <button id="nextMonth" aria-label="Next month">
-                    ❯
-                </button>
-
+                <button id="nextMonth" aria-label="Next month">❯</button>
             </div>
 
             <div class="calendar-grid" id="calendar"></div>
 
             <div class="calendar-legend">
-                <span>
-                    <i class="legend-dot green"></i>
-                    Completed
-                </span>
-
-                <span>
-                    <i class="legend-dot blue"></i>
-                    Selected
-                </span>
+                <span><i class="legend-dot green"></i> Completed</span>
+                <span><i class="legend-dot blue"></i> Selected</span>
             </div>
 
         </section>
 
     </div>
 
-
-    <!-- CHECKLIST SCREEN -->
     <div id="taskScreen" class="hidden">
 
         <section class="task-card">
 
-            <!-- Selected Date -->
             <div class="task-heading">
-
                 <h2 id="selectedDate"></h2>
-
-                <p id="taskMessage">
-                    Your checklist for this day.
-                </p>
-
+                <p id="taskMessage">Your checklist for this day.</p>
             </div>
 
-            <!-- Progress Bar -->
             <div class="progress-track">
                 <div id="progressBar"></div>
             </div>
 
-            <!-- Add Task -->
             <form id="taskForm">
 
                 <input
@@ -108,46 +86,43 @@
                     required
                 >
 
-                <button type="submit" id="addTaskBtn">
-                    +
-                </button>
+                <button type="submit" id="addTaskBtn">+</button>
 
             </form>
 
-            <!-- Task List -->
             <div id="taskList"></div>
 
-            <!-- Task Footer -->
             <div class="task-footer">
-
                 <span id="taskCount">0 tasks</span>
-
-                <button id="clearCompleted" type="button">
-                    Clear completed
-                </button>
-
+                <button id="clearCompleted" type="button">Clear completed</button>
             </div>
 
         </section>
 
-        <!-- BACK TO CALENDAR BUTTON -->
         <button id="backButton" class="back-button">
             ← Back to Calendar
         </button>
 
     </div>
 
-
-    <!-- Footer -->
     <footer>
         <p>One day at a time. Keep going! ✨</p>
     </footer>
 
 </div>
 
-
-<!-- JavaScript -->
 <script src="./script.js"></script>
+
+<script>
+    // Register the service worker
+    if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+            navigator.serviceWorker.register("./sw.js")
+                .then(() => console.log("Service Worker registered"))
+                .catch(error => console.error("Service Worker error:", error));
+        });
+    }
+</script>
 
 </body>
 </html>
